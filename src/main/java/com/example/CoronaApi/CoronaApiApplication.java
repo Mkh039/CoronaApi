@@ -19,6 +19,6 @@ public class CoronaApiApplication {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.example.patientapi")).build();
+				.apis(RequestHandlerSelectors.basePackage("com.example.CoronaApi")).build();
 	}
 }
