@@ -11,7 +11,7 @@ import java.util.Map;
 @Component
 public class DoctorRepository {
     private final static Map<String, Doctor> doctorMap = new HashMap<>();
-    private int doctorId = 100;
+    private int doctorId = 0;
 
     public Collection<Doctor> getDoctorList() {
         return doctorMap.values();

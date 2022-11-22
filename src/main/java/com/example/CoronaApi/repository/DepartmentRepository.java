@@ -8,9 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class DepartmentRepository {
     private final static Map<String, Department> departmentMap = new HashMap<>();
-    private int departmentId = 1000;
+    private int departmentId = 0;
 
     public Department getDepartmentById(String patientId) {
         return departmentMap.get(patientId);
