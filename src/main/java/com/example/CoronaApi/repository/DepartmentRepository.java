@@ -1,18 +1,26 @@
 package com.example.CoronaApi.repository;
 
-import com.example.CoronaApi.model.Department;
-import com.example.CoronaApi.model.GeneralResponse;
+import com.example.CoronaApi.model.request.DepartmentRequest;
+import com.example.CoronaApi.model.response.Department;
+import com.example.CoronaApi.model.response.GeneralResponse;
+import com.example.CoronaApi.utils.ObjectConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Department Repository used to retrieve,update and delete data
+ */
 @Component
 public class DepartmentRepository {
     private final static Map<String, Department> departmentMap = new HashMap<>();
     private int departmentId = 0;
 
+    @Autowired
+    private ObjectConverter objectConverter;
     public Department getDepartmentById(String patientId) {
         return departmentMap.get(patientId);
     }
@@ -21,12 +29,12 @@ public class DepartmentRepository {
         return departmentMap.values();
     }
 
-    public GeneralResponse addDepartment(Department department) {
+    public GeneralResponse addDepartment(DepartmentRequest department) {
         GeneralResponse generalResponse = new GeneralResponse();
         try {
             departmentId++;
             department.setDepartmentId("d" + departmentId);
-            departmentMap.put(department.getDepartmentId(), department);
+            departmentMap.put(department.getDepartmentId(), objectConverter.from(objectConverter.toJson(department), Department.class));
             generalResponse.setId("d" + departmentId);
             generalResponse.setResult("Success");
         } catch (Exception e) {
